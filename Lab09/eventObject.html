@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>event object</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+
+        #div {
+            width: 500px;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid black;
+            background-color: lightblue;
+        }
+
+        p {
+            background-color: lightcoral;
+        }
+
+        span {
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>event 物件</h1>
+    </header>
+    <div class="container">
+        <textarea name="" id="textarea"></textarea>
+        <hr>
+        <div id="div">
+            div element
+            <p>
+                p element
+                <span>span element</span>
+            </p>
+        </div>
+        <hr>
+        <a href="https://www.oracle.com/tw/java/technologies/downloads/" name="href">jdk17</a>
+    </div>
+    <script>
+        // JavaScript code
+        window.onload = function () {
+            /*
+                event事件
+                    事件發生封裝跟事件有關的資訊以及屬性
+                    keyCode
+                    target
+                        一般函數 this指向它
+                    ctrlKey
+                    altKey
+                    shiftKey
+
+            */
+            document.getElementById('textarea').addEventListener('mousemove', function (event) {
+                // console.log('mousemove');
+                // console.log(event.pageX);
+                // console.log(event.pageY);
+                // console.log(event.target);
+                // console.log(event.ctrlKey);
+                // console.log(event.altKey);
+                // console.log(event.shiftKey);
+                // console.log(event.keyCode);
+
+            })
+
+            document.getElementById('div').addEventListener('click', () => {
+                console.log('This is div element was click');
+            })
+            document.querySelector('p').addEventListener('click', () => {
+                console.log('This is p element was click');
+            })
+            document.querySelector('span').addEventListener('click', (e) => {
+                e.stopPropagation(); // 取消氣泡事件
+                console.log('This is span element was click');
+            })
+            document.querySelector('a').addEventListener('click', (e) => {
+                e.preventDefault(); // 取消預設事件
+                document.querySelector('#target').textContent = `default ${event.type} prevented`;
+            })
+        }
+    </script>
+</body>
+
+</html>

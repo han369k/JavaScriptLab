@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StringNumber</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>String Number</h1>
+    </header>
+    <div class="container"></div>
+    <script>
+        // javascript code
+        let str = 'Hello JavaScript';
+        /*
+            字串底層是以單字陣列儲存
+            ['h','e','l','l','o'...]
+        */
+        // String方法
+        // length 讀取字串長度
+        console.log(str.length);
+        console.log(str[1]);
+
+        // trim() 去除前後空白
+        let str2 = '              Hello             ';
+        let newStr = str.trim();
+        console.log(newStr);
+
+        // toUpperCase()
+        // toLowerCase()
+        // indexOf()
+
+        // split(參數)
+        // 可以將String轉成Array
+        let str3 = 'abc,def,ghi,ljk';
+        let newArr = str.split(',');
+        console.log(newArr);
+
+        /*
+            slice(參數1,參數2)
+                可以指定擷取字串
+                參數1. 開始位置
+                參數2. 結束位置 (可省略 直接擷取到結尾)
+            substring()
+                功能跟slice()一模一樣
+                參數2不能用負號
+            substr()
+                參數1. 開始位置
+                參數2. 擷取數量
+            Hello JavaScript
+        */
+
+        let newStr2 = str.slice(1, 7)// ello j
+        let newStr3 = str.substring(1, 7)// ello j 
+        let newStr4 = str.slice(7, -1)// avaScrip
+        let newStr5 = str.substr(0, 3)// Hel
+        console.log(newStr2);
+        console.log(newStr3);
+        console.log(newStr4);
+        console.log(newStr5);
+
+        // Number轉字串方法
+        // 1. toString()
+        let value = 123;
+        console.log(value.toString());
+
+        // 2.String()
+        console.log(String(value));
+
+        // 3. number + ''
+        value = value + '';
+        console.log(value);
+
+        // String 轉 Number
+        // 1. Number()
+        /*
+            如果String 是 純數字
+            會轉成-> Number
+            如果String 是 非純數字
+            會轉成-> NaN
+            空String、空格String
+            會轉成-> 0
+            true
+            會轉成-> 1
+            false、null
+            會轉成-> 0
+            Undefined
+            會轉成-> NaN
+        */
+        var test = '1';
+        var test = 'a';
+        var test = '';
+        var test = ' ';
+        var test = true;
+        var test = false;
+        var test = null;
+        var test = undefined;
+        console.log(Number(test));
+
+        // parseInt()
+        // parseFloat()
+        let css = '10px';
+        console.log(Number(css));
+        // 有效數字取出
+        console.log(parseInt(css));// 10
+        // 如果需要設定回元素的css樣式 記得要加回'px';
+        let newCss = parseInt(css) + 'px';
+
+        // 3. 純數字String -0
+        let value2 = '100' - 0;
+        console.log(value2);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滑鼠事件</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+
+        .out {
+            height: 200px;
+            width: 40%;
+            background-color: greenyellow;
+            float: left;
+            margin: 0 15px;
+        }
+
+        .in {
+            width: 60%;
+            height: 60%;
+            background-color: purple;
+            margin: 10px auto;
+        }
+
+        .titleIn {
+            font-size: 200%;
+            color: brown;
+        }
+
+        .targetAll {}
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 id>滑鼠事件</h1>
+    </header>
+    <!-- 當使用者鼠標移到h3標籤，變更顏色 -->
+    <div class="container">
+        <h3 id="target">JavaScript</h3>
+        <h3 class="targetAll">JavaScriptAll</h3>
+        <h3 class="targetAll">JavaScriptAll</h3>
+        <h3 class="targetAll">JavaScriptAll</h3>
+
+        <button id="btn">button</button>
+        <hr>
+        <div class="out overout">
+            <span id="overoutSpan">move your mouse:</span>
+            <div class="in"></div>
+        </div>
+        <div class="out enterleave">
+            <span id="enterleaveSpan">move your mouse</span>
+            <div class="in"></div>
+        </div>
+        <!-- ctrl + alt + up || down 多行 -->
+
+    </div>
+    <script>
+        // JavaScript code
+        window.onload = function () {
+            // click
+            // dbclick 很少用
+            let btn = document.getElementById('btn');
+            btn.addEventListener('dbclick', () => {
+                console.log('double click');
+            })
+
+            // contextmenu 很少用
+            btn.addEventListener('conttextmenu', () => {
+                console.log('right click');
+            })
+
+            // mouseup
+            // mousedown
+            btn.addEventListener('mouseup', () => {
+                console.log('mouse up');
+            })
+
+            /**
+             *  滑鼠移入移出事件
+             *  不能交叉用 ex: mouseover + mouseleave
+             * 
+             *  mouseover
+             *  mouseout
+             *      及其子元素觸發
+             * 
+             *  mouseenter
+             *  mouseleave
+             *      子元素不觸發
+             * 
+             *  css偽事件 hover
+             * */
+            let divOverout = document.querySelector('.overout');
+            let divEnterleave = document.querySelector('.enterleave')
+            let countOverout = 0;
+            let countEnterleave = 0;
+            divOverout.addEventListener('mouseover', () => {
+                countOverout += 1;
+                document.getElementById('overoutSpan').textContent = `mouse
+                over:${countOverout}`;
+            })
+
+            divEnterleave.addEventListener('mouseenter', () => {
+                countEnterleave += 1;
+                document.getElementById('enterleaveSpan').textContent = `mouse
+                enter:${countEnterleave}`;
+            })
+
+
+            // 一般函數
+            document.getElementById('target').addEventListener('mouseover',
+                function () {
+                    // document.getElementById('target').style.color='pink';
+                    this.style.color = 'pink';
+                })
+
+            target.addEventListener('mouseout', function () {
+                this.style.color = '';
+            });
+
+            //箭頭函數
+            // document.getElementById('target').addEventListener
+            //     ('mouseover', (event) => {
+            //         document.getElementById('target').style.color = 'pink';
+            //         event.target.style.color = 'pink';
+            //     })
+
+
+            // 透過forEach loop 綁定事件
+            let targets = document.querySelectorAll('.targetAll');
+            targets.forEach((item) => {
+                item.addEventListener('mouseover', () => {
+                    item.style.color = 'yellow';
+                })
+                item.addEventListener('mouseout', () => {
+                    item.style.color = '';
+                })
+            });
+        }
+    </script>
+</body>
+
+</html>

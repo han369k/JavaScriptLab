@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Object</h1>
+    </header>
+    <div class="container"></div>
+    <script>
+        // javascript code
+        let obj = new Object();
+        // 設定或修改物件屬性跟值
+        obj.name = 'Gray';
+        obj.age = 19;
+        // 刪除物件屬性
+        delete obj.name
+        // 讀取屬性
+        console.log(obj.name);
+        // 物件屬性名稱不像變數名稱命名有強制規定
+        obj.let = 'hello';
+        // 強制命名屬性名稱 object["屬性名稱"]
+        obj["123"] = 123;
+        console.log(obj);
+        // 屬性的值 可以是任意值
+        obj.test = true;
+        obj.test = null;
+        obj.test = [];
+        obj.test = function () { };
+
+        let obj2 = {
+            name: 'Gray',
+            gender: 'male',
+            age: 18,
+            pet: { animal: 'cat', name: 'lemon' },
+            interest: ['running', 'coding'],
+            greeting: function () {
+                return 'hello';
+            }
+        };
+        console.log(obj2.pet["animal"]);
+        console.log(obj2.interest[0]);
+        console.log(obj2.greeting());
+
+
+        // "in" check properties in object
+        // ("prop" in object)
+        console.log("age" in obj);
+        console.log("age1" in obj);
+
+        // preview OOP(Object Oriented Programming) 
+        let a = 123;
+        let b = a;
+        a++;
+        console.log(a);//124
+        console.log(b);//123
+
+        let objA = {};
+        objA.name = 'gary';
+        let objB = objA;
+        objB.name = 'jerry';
+        console.log(objA.name);// jerry
+        console.log(objB.name);// jerry
+
+        let objC = {};
+        let objD = {};
+        objC.name = 'gary';
+        objD.name = 'gary';
+        console.log(objC == objD);// false
+        console.log(objC.name == objD.name);// true
+
+    </script>
+</body>
+
+</html>

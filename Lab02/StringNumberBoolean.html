@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StringNumberBoolean</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>StringNumberBoolean</h1>
+    </header>
+    <div class="container"></div>
+    <script>
+        // javascript code
+        // String
+        let str = "JavaScript";
+        let str1 = "JavaScrpt";
+        // \n換行
+        let str2 = "Java\nScript"
+        // \跳脫字元
+        let str3 = "he\'s hero"
+        // + 連接符號
+        let str4 = str + "" + str2 + "yeah";
+        // ES6 模板字串 `string ${variable}`
+        let str5 = `${str} ${str2} yeah`;
+        console.log(str2);
+        console.log(str3);
+        console.log(str4);
+        console.log(str5);
+
+        // Number
+        let a = 123;
+        // typeof 判斷資料型別
+        console.log(typeof a);
+        console.log(typeof str);
+        let b = 'abc' * 'def';
+        console.log(b);// NaN -> Not a Number
+        console.log(Number.MAX_VALUE * Number.MAX_VALUE);// Infinity number資料型別
+        console.log(10 / 0);// Infinity
+        // 算法2進制去算
+        // 浮點數運算會得不精確結果 整數保證正確
+        console.log(0.2 * 3 == 0.6)// flase
+        console.log(0.2 * 3);// 0.6000000000000001
+
+        // Boolean
+        let bool = false;
+        /*
+            把其他資料型別轉成boolean會呈現什麼狀態?
+            使用 Boolean() 做轉換
+        */
+        var bool2 = 123;// true
+        var bool2 = -123;// true
+        var bool2 = 0;// false
+        var bool2 = '123';// true
+        var bool2 = '';// 空字串-> false
+        var bool2 = " ";// space-> ture ; != 空字串
+        var bool2 = undefined;// false
+        var bool2 = NaN;// false
+        var bool2 = null;// false
+        console.log(Boolean(bool2));
+
+    </script>
+</body>
+
+</html>

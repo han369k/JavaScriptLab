@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>promise</h1>
+    </header>
+    <div class="container"></div>
+    <script>
+        // JavaScript code
+        window.onload = function () {
+
+            let f1 = () => {
+                console.log('1');
+                setTimeout(() => {
+                    console.log('2');
+                }, 1000);
+                console.log('3');
+            }
+            // f1();
+
+            // ex1
+            let printWord = function (word) {
+                let time = Math.random() * 1000;
+                setTimeout(() => {
+                    console.log(word);
+                }, time);
+            }
+
+            let f2 = () => {
+                printWord('A');
+                printWord('B');
+                printWord('C');
+                printWord('D');
+                printWord('E');
+            }
+
+            f2();
+
+            // ex2
+            let printWord2 = function (word, fn) {
+                let time = Math.random() * 1000;
+                setTimeout(() => {
+                    console.log(word);
+                    if (fn) {
+                        fn();
+                    }
+                }, time);
+            }
+
+            let f3 = () => {
+                printWord2("A", function () {
+                    printWord2("B", function () {
+                        printWord2("C", function () {
+                            printWord2("D", function () {
+                                printWord2("E");
+                            });
+                        });
+                    });
+                });
+            };
+
+            f3();
+
+            // promise物件
+            /**
+             *  new Promise((resolve, reject) => {
+             *      resolve('成功');
+             *      reject('失敗');
+             *  }))
+             *  .then()處理成功
+             *  .catch()處理失敗
+            */
+            let promisePrintWord = function (word) {
+                return new Promise((resolve, reject) => {
+                    let time = Math.random() * 1000;
+                    setTimeout(() => {
+                        console.log(word);
+                        resolve();
+                    }, time);
+                });
+            }
+
+            promisePrintWord('A')
+                .then(() => {
+                    return promisePrintWord('B');
+                })
+                .then(() => {
+                    return promisePrintWord('C');
+                })
+                .then(() => {
+                    return promisePrintWord('D');
+                })
+                .then(() => {
+                    return promisePrintWord('E');
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+
+
+        }
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Array 陣列</h1>
+    </header>
+    <div class="container"></div>
+    <script>
+        // javascript code
+        // Create array method 1
+        let arr = new Array(1, 2, 3, 4);
+        // length 讀取長度
+        console.log(arr.length);
+        // 依據索引值設定陣列的值
+        arr[10] = 100;
+        console.log(arr);
+        // 新增一個值放入陣列的最後一個位置
+        arr[arr.length] = 99;
+        console.log(arr)
+        console.log(arr[5])// undifined
+        // Create array method 2
+        // JavaScript允許Array放任意型別，但別這麼做
+        let arr2 = [1, 2, 3, 4, '5', {}, true]
+
+
+        // Array Method
+        /*
+            **以下破壞性方法**
+            pop()
+                尾端刪除
+            push()
+                尾端新增
+            shfit()
+                前端刪除
+            unshfit()
+                前端新增
+        */
+        arr2.push('EEIT215');
+        arr2.shift();
+        arr2.unshift('js');
+        console.log(arr2);
+
+        /*
+            **非破壞性方法**
+            concat()
+                可以連結兩個或多個陣列
+        */
+        let newArr = arr.concat(arr2);
+        console.log(newArr);
+        console.log(arr);
+
+        /*
+            **非破壞性方法**
+            join(參數)
+            此方法可以將Array轉成String
+            預設,
+            */
+        let arrJoin = arr2.join();
+        console.log(arrJoin);
+
+        /* 
+            indexOf()
+            搜尋Array裡的元素回傳索引值
+            沒有找到該元素回傳 -1
+        */
+        console.log(arr2.indexOf(2));// 在第二位 回傳 1
+        console.log(arr2.indexOf(77));// -1
+
+        /*
+            slice(參數1,參數2)
+                從Array選取指定元素返回
+                參數1: 擷取開始位置
+                參數2: 擷取結束位置 不包含位置本身
+                    可以省略 擷取到最後
+            
+            splice(參數1,參數2,參數3)
+                可以用於刪除指定位置並新增
+                參數1: 開始位置
+                參數2: 結束位置
+                參數3: 傳遞新元素 可省略
+                ** 此為破壞性方法
+        */
+        let arrSlice = arr2.slice(1, 4)
+        console.log(arrSlice);
+
+        arr.splice(1, 1, 'js');
+        console.log(arr2);
+
+        // forEach(函式) method
+        arr.forEach(function (ele, index) {
+            console.log('index=' + index);
+            console.log('ele=' + ele);
+        })
+
+        // ES6 解構賦值
+        let arr3 = [1, 2, 3];
+        // let a = arr[0];
+        // let b = arr[1];
+        // 基本寫法
+        let [a, b, c] = arr3;
+        console.log(a)
+
+        let person = { name: 'hank', age: 18 };
+        // let name = person.name;
+        // let age=person.age;
+        // 基本寫法
+        let { name, age } = person;
+        console.log(name);
+
+        // 剩餘運算符
+        let [x, ...y] = [1, 2, 3, 4];
+        console.log(x);//1
+        console.log(y);//2,3,4
+
+        // 交換變數
+        let a1 = 'gary';
+        let a2 = 'jerry';
+        console.log(a1, a2);
+        // let temp = a1;
+        // a1 = a2;
+        // a2 = temp;
+        [a1, a2] = [a2, a1];
+        console.log(a1, a2);
+
+
+        // 函式的參數解構
+        function greet(name, age) {
+            console.log(`我是${name},年齡${age}`);
+        }
+        greet({ age: 18, name: "gary" });
+
+        // for...of 解構Array
+        let people = [['gary1', 20], ['gary2', 21]];
+        for (let [name, age] of people) {
+            console.log(name, age);
+        }
+
+        // Array合併
+        let arr4 = [...arr, ...arr2];
+        console.log(arr4);
+
+        // 物件合併
+        let obj1 = { name: 'gary1', age: 1 };
+        let obj2 = { name2: 'gary2', age2: 2 };
+        let obj3 = { ...obj1, ...obj2 };
+        console.log(obj3);
+
+    </script>
+</body>
+
+</html>

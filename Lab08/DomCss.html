@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DomCss</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+        }
+
+        #box2 {
+            width: 100px;
+            height: 100px;
+            background-color: gray;
+        }
+
+        #box2.active {
+            background-color: pink;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1></h1>
+    </header>
+    <div class="container">
+        <button id="btn1">button1</button>
+        <button id="btn2">button2</button>
+        <button id="add">add</button>
+        <button id="remove">remove</button>
+        <button id="toggle">toggle</button>
+        <hr>
+        <div id="box"></div>
+        <div id="box2"></div>
+    </div>
+
+
+
+    <script>
+        // JavaScript code
+        let box = document.getElementById('box')
+        let box2 = document.getElementById('box2')
+        window.onload = function () {
+
+            // 設定樣式2
+            document.getElementById('add').addEventListener('click', () => {
+                // element.classList.add
+                box2.classList.add('active');
+            })
+
+            // 移除樣式
+            document.getElementById('remove').addEventListener('click', () => {
+                box2.classList.remove('active');
+            })
+
+            // 切換 有就移除 沒有就加上
+            document.getElementById('toggle').addEventListener('click', () => {
+                box2.classList.toggle('active');
+            })
+
+            // 設定樣式
+            document.getElementById('btn1').addEventListener('click', () => {
+                /**
+                 *  element.style.樣式名稱=樣式的值
+                 *  background-color script標籤 ##不能寫
+                 *  改寫成駝峰式 backgroundColor
+                 *  border-radius borderRadius
+                */
+                box.style.width = '200px';
+                box.style.height = '200px';
+                box.style.backgroundColor = 'pink';
+                box.style.borderRadius = '50%'
+            })
+
+            // 讀取樣式
+            document.getElementById('btn2').addEventListener('click', () => {
+                // 讀取行內標籤樣式
+                console.log(box.style.width);
+                // 讀取元素全域樣式
+                // window.getComputedStyle();
+                let boxStyle = window.getComputedStyle(box);
+                console.log(boxStyle);
+                console.log(boxStyle.width);
+            })
+
+
+        }
+    </script>
+</body>
+
+</html>

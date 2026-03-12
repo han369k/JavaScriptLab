@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>note</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+
+        table {
+            width: 600 px;
+            background-color: lightblue;
+            border: 2px solid black;
+            margin: 5px;
+            text-align: center;
+        }
+
+        td{
+            width:200px ;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>記事本</h1>
+    </header>
+    <div class="container">
+        <div>
+            <input type="text" placeholder="請輸入姓名">
+            <input type="text" placeholder="請輸入記事內容">
+            <button id="add"><i class="fa-solid fa-plus"></i>add</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>內容</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="note">
+                <tr>
+                    <!-- 
+                    示範
+                    <td>name</td>
+                    <td>content</td>
+                    <td><button id="edit">Edit</button><button>Delete</button></td> 
+                    -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        // JavaScript code
+        window.onload = function () {
+            /**
+             *  功能需求:
+             *  1. 新增功能
+             *      使用者在input輸入完姓名及內容後
+             *      新增到tbody內，架構如上
+             *  2. 修改功能
+             *      使用輸入類型的跳出視窗，更改該列記事內容
+             *  3. 刪除功能
+             *      按下按鈕，跳出警告視窗是否刪除 如是即刪除該列反之沒有動作
+             * */
+            
+             // 新增功能
+             // 這個的意思是指說，我選擇id為add的元素，並抓取回傳一個element object
+             // 並且將其綁定onclick event，當event發生時，執行以下function
+             document.getElementById('add').onclick = () => {
+                // 先抓使用者輸入的value 使用querySeletor
+                let name = document.querySelector('input[placeholder="請輸入姓名"]').value;
+                let content = document.querySelector('input[placeholder="請輸入記事內容"]').value;
+
+                // 判斷內容是否為空 (避免輸入空字串)
+                if (name.trim() === '' || content.trim() === '') {
+                    alert('請輸入姓名與內容！');
+                    return; // 直接結束函式，不往下執行
+                }
+
+                // 建立元素物件 等等要做插入使用 需要幾個就建幾個
+                let newRow = document.createElement('tr');
+                let tdName = document.createElement('td');
+                let tdContent = document.createElement('td');
+                let tdBtn = document.createElement('td');
+                let btnEdit = document.createElement('button');
+                let btnDelete = document.createElement('button');
+                // 將 value 填入元素物件內
+                tdName.textContent = name;
+                tdContent.textContent = content;
+                btnEdit.innerHTML = '<i class="fa-solid fa-pencil"></i>';
+                btnDelete.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+                // 插入元素物件
+                tdBtn.append(btnEdit, btnDelete);
+                newRow.append(tdName, tdContent, tdBtn);
+                // 插入tbody
+                document.getElementById('note').appendChild(newRow);
+
+                // 修改功能
+                // 做在這裡可以省掉找變數的麻煩 直接共用
+                btnEdit.onclick = () => {
+                    let newContent = prompt('請輸入更新內容', tdContent.textContent);
+                    if(newContent != null) {
+                        tdContent.textContent = newContent;
+                    }
+                }
+                // 刪除功能
+                btnDelete.onclick = () => {
+                    // 使用者點擊確認就是true
+                    if(confirm('確定要刪除嗎?')) {
+                        newRow.remove();
+                    }
+                }
+            }
+
+            // 監聽鍵盤enter
+            // 這裡拿到的是一個list
+            let inputs = document.querySelectorAll('input');
+
+            // 對清單裡的「每一個 (item)」做動作
+            inputs.forEach((item) => {
+                // item 代表當下拿到的那個 input 元素
+                item.addEventListener('keydown', (e) => {
+                    // 如果正在進行中文輸入法選字 （isComposing 為 true)，直接結束，不要觸發送出
+                    if (e.isComposing) {
+                        return;
+                    }
+                    if (e.key === 'Enter') {
+                        document.getElementById('add').click();
+                    }
+                });
+            });
+
+
+
+        }
+        
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DomNode</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Dom Node 節點</h1>
+    </header>
+    <div class="container">
+        <ul id="city">
+            <li>台北</li>
+            <!-- <li id="tyn">桃園</li> -->
+            <li id="tyn"> <span style="display: none;">秘密</span><b>桃園</b></li>
+            <li>台中</li>
+            <li>台南</li>
+            <li>高雄</li>
+        </ul>
+        <hr>
+        <button class="btn">取得#tyn文字節點</button>
+        <button class="btn">設定#tyn文字節點</button>
+        <button class="btn">尋訪文字節點</button>
+        <button class="btn">新增元素appendChild節點</button>
+        <button class="btn">新增元素insertBefore節點</button>
+        <button class="btn">新增元素prepend節點</button>
+        <button class="btn">刪除元素prepend節點</button>
+        <button class="btn">尋訪元素nextElementSibling</button>
+        <button class="btn">尋訪元素previousSibling</button>
+        <button class="btn">尋訪元素parentNode</button>
+        <button class="btn">尋訪元素children childNodes</button>
+
+    </div>
+    <script>
+        // JavaScript code
+        window.onload = function () {
+
+
+            const buttons = document.querySelectorAll('.btn');
+            const tyn = document.getElementById('tyn');
+
+            console.log(buttons);
+            buttons[0].addEventListener('click', function () {
+                // Listener means is 監聽事件
+                // innerHTML 取得文字 標籤 可能會受到xss攻擊 html更改
+                // innerText 使用者看的到的文字
+                // textContent 不解析html 會包含隱藏文字
+                console.log(tyn.innerHTML);
+                console.log(tyn.innerText);
+                console.log(tyn.textContent);
+            })
+            buttons[1].onclick = function () {
+                // tyn.textContent = '123';
+                tyn.innerHTML = '<h1>js</h1>';
+            }
+
+            buttons[2].onclick = function () {
+                const liList = document.querySelectorAll('li');
+                // console.log(liList);
+                for (let i = 0; i < liList.length; i++) {
+                    console.log(liList[i]);
+                }
+            }
+            /* 
+            appendChild(element) 
+            指定在父元素的 "最後位置" 插入子元素
+            */
+            buttons[3].addEventListener('click', function () {
+                // 創建元素
+                // document.createElement('元素標籤')
+                let li = document.createElement('li');
+                li.textContent = '台東';
+                // 父元素.appendChild(子元素)
+                // 父元素.append(子元素,子元素...)
+                // document.getElementById('city').appendChild(li);
+                document.getElementById('city').append(li);
+            })
+
+
+            /* 
+            prepend
+            指定在父元素的 "最前位置" 插入子元素
+            */
+            buttons[5].addEventListener('click', function () {
+                let li = document.createElement('li');
+                li.textContent = '基隆';
+                document.getElementById('city').prepend(li);
+            })
+
+            /* 
+            inserBefore(element,指定插入節點)
+            指定在父元素的 "指定位置" 插入子元素
+            */
+            buttons[4].addEventListener('click', function () {
+                let li = document.createElement('li');
+                li.textContent = '新竹'
+                document.getElementById('city').insertBefore(li, tyn);
+            })
+
+            // removeChild() 移除元素節點
+            // remove()
+            buttons[6].onclick = function () {
+                // document.getElementById('city').removeChild(tyn);
+                tyn.remove();
+            }
+
+            buttons[7].onclick = function () {
+                let nextLi = tyn.nextElementSibling;
+                if (nextLi) nextLi.textContent = 'next';
+            };
+
+            // 8. previousSibling (修正拼字 funtion -> function)
+            // 注意：previousSibling 會抓到「空白文字節點」，建議改用 previousElementSibling 比較準
+            buttons[8].onclick = function () {
+                let prevLi = tyn.previousElementSibling;
+                if (prevLi) prevLi.textContent = 'prev';
+            };
+
+            // 9. parentNode (修正混合寫法)
+            buttons[9].onclick = function () {
+                let ul = tyn.parentNode;
+                console.log(ul);
+            };
+
+            // 尋訪元素往下找子元素 children childNodes
+            buttons[10].addEventListener('click', () => {
+                let ul = document.getElementById('city');
+                console.log(ul.children); // 返回HTMLCollection集合
+                console.log(ul.childNodes); // 返回NodeList集合 包含元素外的節點
+            })
+        }
+
+
+
+
+
+    </script>
+</body>
+
+</html>

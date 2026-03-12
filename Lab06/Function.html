@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Function</h1>
+    </header>
+    <div class="container"></div>
+    <script>
+        // javascript code
+        /*
+            function 也是個物件 (public method)
+                封裝程式碼 需要時調用
+                封裝程式碼不會立即執行
+         */
+
+        /*
+            function 函數名稱(參數1,參數2...){
+                封裝程式碼
+            }
+        */
+        // Create function method 1
+        function fun1() {
+            console.log('hello123');
+        }
+        // 調用 function , function name + ()
+        fun1();
+
+        // Create function method 2: 
+        let fun2 = function () {
+            console.log('hello2');
+        }
+        fun2();
+
+        // Create function method 3: 
+        // Not proposal use this method for create
+        let fun3 = new Function("console.log('hello3')");
+        fun3();
+
+        // Parameter(參數)
+        function sum(x, y) {
+            console.log(x + y);
+        }
+        /*
+            1. Since there is no built-in type checking during function invocation, 
+            we must manually validate parameters to ensure no illegal arguments are processed.
+
+            2. The compiler (or runtime) does not check the argument count during the call.
+        */
+        sum(1, 1);
+        sum(1, 'A');
+        sum(1, 2, 3);
+        sum(1);// NaN
+
+        function sayHello(name, age, gender, address) {
+            console.log(`我是${name},今年${age},性別是${gender},地址是${address}`);
+        }
+
+        // Functions with too many parameters are difficult to maintain and error-prone.
+        sayHello("gary", 19, '男', 'F202');
+        sayHello("gary", '男', 19, 'F202');
+
+        // Consider passing an "options object" as an argument.
+        function sayHello2(obj) {
+            console.log(`我是${obj.name},今年${obj.age},性別是${obj.gender},地址是${obj.address}`);
+        }
+        let objA = {
+            name: 'garyA',
+            age: 18,
+            gender: 'male',
+            address: 'F202'
+        }
+        sayHello2(objA);
+
+        // Missing return statements default to returning undefined.
+        function sum2(x, y, z) {
+            return x + y + z;
+            // The return statement terminates function execution immediately.
+        }
+        let result = sum2(1, 2, 3);
+        console.log(result);
+
+        function isEven(num) {
+            if (num % 2 == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        console.log(isEven(5));
+        console.log(isEven(6));
+
+        /*
+            立即執行涵式
+            匿名涵式
+            IFEE
+            用()包住整體涵式 只會執行一次
+            注意要加分號
+        */
+
+        (function () {
+            console.log('匿名函數')
+        })();
+
+        (function (a, b) {
+            console.log(a);
+            console.log(b);
+        })('EEIT215', 'JavaScript');
+
+        // 封裝
+        var a = 'gray';
+        (function () {
+            var b = 'gary';
+        })
+
+        /*
+            ES6 新增涵式寫法
+            箭頭涵式 Arrow function
+                1. 若本體只有單行敘述可以省略{}
+                2. 若參數只有一個 可以省略()
+                3. 沒有參數() 保留
+
+                ArrowFunction this 一般Func this值不一樣
+        */
+
+        // basic
+        let getTriangle = (base, height) => {
+            return base * height / 2;
+        }
+
+        // Simplify 1 
+        let getTriangle2 = (base, height) => base * height / 2;
+
+        // Simplify 2 (only 1 parameter)
+        let getCircle = radis => radis * radis * Math.PI;
+
+        let show = () => console.log('arrow function')
+
+    </script>
+</body>
+
+</html>

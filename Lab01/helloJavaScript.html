@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab01</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: white;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* padding 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>JavaScript</h1>
+    </header>
+    <div class="container">
+        <!-- 第二個方式 寫在標籤內 但不建議此行為 屬於結構跟行為高耦合 不便維護-->
+        <button onclick="console.log('hello JavaScript2')">hello</button>
+        <a href="javascript:console.log('超連結 JavaScript3')">hello2</a>
+    </div>
+    <!-- 第三種方式 外部引入js -->
+    <script src="./a.js">
+        // 一旦引入外部js 內部就不會執行
+        // console.log('內部js'); 不要寫在裡面
+        console.log(a);
+    </script>
+    <script src="./b.js">
+        console.log(a);
+    </script>
+    <script>
+        // javascript code
+        // like Java System.out.println("");
+        // 第一個方式
+        console.log("hello JavaScript");
+    </script>
+</body>
+
+</html>

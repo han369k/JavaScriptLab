@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <header>
+        <h1>BOM瀏覽器物件</h1>
+    </header>
+    <div class="container">
+        <button id="alert">alert</button>
+        <button id="swal">swal</button>
+        <button id="confirm">confirm</button>
+        <button id="prompt">prompt</button>
+        <hr>
+        key: <input type="text" id="key">
+        value: <input type="text" id="value">
+        <button id="localStorage">sent</button>
+        <br>
+        取出localStorage:<input type="text" id="get"> <button id="btnGet">查詢</button>
+        <br>
+        指定刪除localStorage:<input type="text" id="remove"> <button id="btnRemove">刪除</button>
+        全部清除 <button id="clear">clear</button>
+        <br>
+        <a href="javascript:history.back()">上一頁</a>
+        <a href="javascript:history.forward()">下一頁</a>
+    </div>
+    <script>
+        // JavaScript code
+        window.onload = function () {
+            //  多行輸入 ctrl + alt
+            /**
+             *  BOM object
+             *      window 全域物件 
+             *      window.console.log()
+             *      window.console.time()
+             *      window.console.timeEnd()
+             *      window.alert()      #警告視窗
+             *      window.confirm()    #確認視窗
+             *      window.prompt()     #輸入類型跳窗
+             *      window.localStorage #暫存瀏覽器物件
+             *          setItem(key,value)
+             *          getItem(key)
+             *          removeItem(key)
+             *          clear()
+             *          簡單來說，localStorage就像是瀏覽器裡的一個小型資料庫，
+             *          它可以用來記錄使用者的偏好設定（如夜間模式、語系），
+             *          或是購物車內容等不需要傳送到伺服器的資料。
+             *          每個網域通常有 5MB 的空間（相比之下 Cookie 只有 4KB）。
+             *      window.setInterval()
+             *      window.setTimeout()
+             *      window.getComputedStyle()
+             * 
+             *  `   hitstory        瀏覽器歷史訊息
+             *      location        瀏覽器url相關資訊
+             *      navigator       當前瀏覽器資訊
+            */
+            document.getElementById('alert').onclick = () => {
+                // window.alert('字串') 跳出警告視窗
+                alert('hello');
+            }
+
+            document.getElementById('confirm').onclick = () => {
+                // window.confirm('字串') 跳出確認視窗
+                // confirm('how are you?'); // 回傳boolean
+                if (confirm('how are you?')) {
+                    console.log('yes');
+                } else {
+                    console.log('no');
+                }
+            }
+
+            document.getElementById('prompt').onclick = () => {
+                // window.prompt('字串','預設值') 輸入類型跳窗
+                let value = prompt('請輸入姓名', '預設文字');
+                console.log(value);
+            }
+
+            document.getElementById('swal').onclick = () => {
+                Swal.fire({
+                    title: "Good job!",
+                    text: "You clicked the button!",
+                    icon: "success"
+                })
+            }
+
+            document.getElementById('localStorage').onclick = () => {
+                let key = document.getElementById('key').value;
+                let value = document.getElementById('value').value;
+                console.log(key, value);
+                localStorage.setItem(key, value);
+            }
+
+            document.getElementById('btnGet').onclick = () => {
+                let key = document.getElementById('get').value;
+                alert(`value:${localStorage.getItem(key)}`);
+            }
+
+            document.getElementById('btnRemove').onclick = () => {
+                let key = document.getElementById('remove').value;
+                localStorage.removeItem(key);
+                alert(`指定刪除:${key}`);
+            }
+
+            document.getElementById('clear').onclick = () => {
+                localStorage.clear();
+                alert('全部清除');
+            }
+        }
+    </script>
+</body>
+
+</html>

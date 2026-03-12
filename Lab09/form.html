@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表單事件</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>表單事件</h1>
+    </header>
+    <div class="container">
+        <input type="text" id="input" placeholder="請輸入">
+        <hr>
+        <div>
+            <label for="">
+                身分證字號:
+                <input type="text" id="regexpIdentityNum">
+                <span id="result"></span>
+            </label>
+        </div>
+        <hr>
+        <div>
+            <input type="text" maxlength="4" class="card" style="width: 50px;">
+            <input type="text" maxlength="4" class="card" style="width: 50px;">
+            <input type="text" maxlength="4" class="card" style="width: 50px;">
+            <input type="text" maxlength="4" class="card" style="width: 50px;">
+        </div>
+        <hr>
+        <div>
+            <select name="" id="select">
+                <option value="TPE">台北</option>
+                <option value="NTP">新北</option>
+                <option value="TYN">桃園</option>
+            </select>
+        </div>
+        <hr>
+        <div id="target">
+            <input type="radio" name="radioGroup1" value="A">A
+            <input type="radio" name="radioGroup1" value="B">B
+            <input type="radio" name="radioGroup2" value="C">C
+            <input type="radio" name="radioGroup2" value="D">D
+            <br>
+            <button id="getRadioBtn">取得radio值</button>
+            <button id="setRadioBtn">設定radio值</button>
+        </div>
+        <hr>
+        <div>
+            <input type="checkbox" name="checkboxGroup" value="1">1
+            <input type="checkbox" name="checkboxGroup" value="2">2
+            <input type="checkbox" name="checkboxGroup" value="3">3
+            <br>
+            <button id="getCheckboxBtn">取得checkbox值</button>
+            <button id="setCheckboxBtn">設定checkbox值</button>
+        </div>
+    </div>
+    <script>
+        // JavaScript code
+        window.onload = function () {
+            // focus 進入輸入框 (例如應用在信用卡輸入，每4個號碼一組)
+            document.getElementById('input').addEventListener('focus', () => {
+                console.log('focus');
+            })
+            // blur 離開輸入框
+            document.getElementById('input').addEventListener('blur', () => {
+                console.log('blur');
+            })
+
+            /*
+                1. declare a valiable for RegExp.
+                2. getElement the input tag id
+                3. check input value with RegExp
+                4. output the result
+            */
+            // RegExp 去除逗號，且直接使用正則字面值即可
+            const checkIdintityNum = /^[A-Z][1289][0-9]{8}$/i;
+            const inputId = document.getElementById('regexpIdentityNum');
+            const resultDisplay = document.getElementById('result');
+
+            inputId.addEventListener('blur', () => {
+                const isValid = checkIdintityNum.test(inputId.value);
+                if (isValid) {
+                    resultDisplay.textContent = '正確';
+                } else {
+                    resultDisplay.textContent = '錯誤';
+                }
+            })
+
+            // 每輸入四個數字就往下切換下一個輸入框
+            const cards = document.querySelectorAll('.card');
+            // cards.forEach((card, index) => {
+            //     card.addEventListener('input', () => {
+            //         // 檢查是否輸入滿 4 碼，且下一個輸入框確實存在
+            //         if (card.value.length === 4 && cards[index + 1]) {
+            //             cards[index + 1].focus();
+            //         }
+            //     })
+            // })
+
+            // 透過尋訪元素
+            cards.forEach(card => {
+                card.addEventListener('input', () => {
+                    if (card.value.length === 4) {
+                        const nextInput = card.nextElementSibling; // 尋訪下一個鄰近節點
+                        if (nextInput && nextInput.classList.contains('card')) {
+                            nextInput.focus();
+                        }
+                    }
+                });
+            })
+
+            // change event
+            document.getElementById('select').addEventListener('change', () => {
+                console.log(document.getElementById('select').value);
+                document.getElementById('target').textContent = document.getElementById('select').value;
+            })
+
+            // get radio value
+            document.getElementById('getRadioBtn')
+                .addEventListener('click', () => {
+                    const radioGroup = document.getElementsByName('radioGroup1');
+                    let result = []; // 這樣就不用處理陣列+字串
+                    radioGroup.forEach((item) => {
+                        if (item.checked) {
+                            // result = item.value;
+                            result.push = radio.value;
+                        }
+                    })
+                    console.log(result);
+                })
+
+            // set radio value
+            document.getElementById('setRadioBtn')
+                .addEventListener('click', () => {
+                    const radioC = document.querySelector('input[name="radioGroup2"][value="C"]');
+                    if (radioC) {
+                        radioC.checked = true;
+                    }
+                })
+
+            function setRadioValue(name, value) {
+                let radioGroup = document.getElementsByName(name);
+                for (let radio of radioGroup) {
+                    if (radio.value == value) {
+                        radio.checked = true;
+                    }
+                }
+            }
+
+            // get checkbox value
+            document.getElementById('getCheckboxBtn').addEventListener('click', () => {
+                let checkboxGroup = document.getElementsByName('checkboxGroup');
+                let result = [];
+                for (let checkbox of checkboxGroup) {
+                    if (checkbox.checked) {
+                        result.push(checkbox.value);
+                    }
+                }
+            })
+
+            // set checkbox value
+            document.getElementById('setCheckboxBtn').addEventListener('click', () => {
+                setRadioValue('checkboxGroup', ['1', '3']);
+            })
+        }
+
+        function setRadioValue(name, valueArr) {
+            let checkboxGroup = document.getElementsByName(name);
+            for (let checkbox of checkboxGroup) {
+                // indexOf 搜尋Array是否該值 回傳索引值 沒有該值回傳-1
+                if (valueArr.indexOf(checkbox.value) > -1) {
+                    checkbox.checked = true;
+                }
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

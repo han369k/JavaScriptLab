@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Math</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Date Math</h1>
+    </header>
+    <div class="container"></div>
+    <script>
+        // javascript code
+        // Date Object
+        // 現在時間
+        let now = new Date();
+        // 以browser的時間為主
+        console.log(now);
+
+        // 指定時間
+        let endTime = new Date('2026/05/29 09:00:00');
+        console.log(endTime);
+
+        // 星期幾
+        console.log(now.getDay());
+        // 幾號
+        console.log(now.getDate());
+        // 0~11
+        console.log(now.getMonth());// 1=Feb
+        // 幾年
+        console.log(now.getFullYear());
+
+        // 西元年轉民國年
+        function getTwYear(date) {
+            let twYear = date.getFullYear() - 1911;
+            return `西元${date.getFullYear()}年，是民國${twYear}`;
+        }
+        console.log(getTwYear(now))
+
+        // Math Object
+        // Static Method 不用instantiate 
+        console.log(Math.PI);
+        // round() 四捨五入
+        console.log(Math.round(1.33));
+        // ceil() 無條件進位
+        // floor() 無條件捨去
+
+        // random() 取隨機數
+        console.log(Math.round(Math.random() * 10));
+
+        /*
+            x~y
+            Math.round(Math.random() *y-1) +x
+        */
+        // 1~30
+        console.log(Math.round(Math.random() * 29) + 1);
+        // max() min()
+        console.log(Math.max(10, 20, 99));
+        console.log(Math.min(10, 20, 99));
+        // pow(底數,指數) 指數運算
+        console.log(Math.pow(2, 10));
+        // sqrt() 平方根
+        console.log(Math.sqrt(4));
+
+
+    </script>
+</body>
+
+</html>

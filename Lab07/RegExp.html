@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RegExp</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>RegExp</h1>
+    </header>
+    <div class="container"></div>
+    <script>
+        // javascript code
+        /* 
+            正則表達式 正規表示法
+            都一樣翻譯問題而已
+            自訂String規則
+
+            new RegExp('正則表達規則','匹配模式');
+            i : 忽略大小寫
+            g : 全域搜尋
+
+        */
+        // 寫法1:
+        new RegExp('a', 'i');
+        // 寫法2:
+        new RegExp(/a/i);
+
+        /* 
+            正則表達式規則
+            a|b|c abc任一字元都
+            [abc] abc任一字元都
+            [a-z] 任意英文字元
+            [0-9] 任意數字字元
+            {n} n幾次 量詞只對一個字元有效
+            {m,n} m-n幾次
+            + 至少一個
+            ? 0或1個
+            * 任意
+
+            /^ 規則開頭
+            $/ 規則結尾
+
+            test()
+                此方法檢查String是否符合規則
+                回傳Boolean
+        */
+        var regexp = new RegExp(/a|b|c/);
+        var regexp = new RegExp(/[abc]/);
+        var regexp = new RegExp(/[a-z]/);
+        var regexp = new RegExp(/[0-9]/);
+        var regexp = new RegExp(/ab{3}/);
+        var regexp = new RegExp(/ab{1,3}c/);
+        var regexp = new RegExp(/ab+c/);
+        var regexp = new RegExp(/ab?c/);
+        var regexp = new RegExp(/ab*c/);
+
+
+        console.log(regexp.test('aaabbbc'));
+
+        // 台灣手機號碼 正則表達式
+        const regexpTwCellphoneNum = new RegExp(/^09\d{8}$/);
+        console.log(regexpTwCellphoneNum.test('0979390087'))
+        // 台灣身份證字號 正則表達式
+        const regexpIdentityNum = new RegExp(/^[A-Z]{1}[1,2,8,9]{1}[0-9]{8}$/i)
+        console.log(regexpIdentityNum.test('F123456789'))
+
+    </script>
+</body>
+
+</html>

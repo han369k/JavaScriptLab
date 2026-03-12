@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setInterval</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>setInterval</h1>
+    </header>
+    <div class="container">
+        <h3 id="target">1</h3>
+        <button id="slideUp">slideUp</button>
+        <button id="slideDown">slideDown</button>
+        <hr>
+        <div id="box"></div>
+    </div>
+    <script>
+        // JavaScript code
+        window.onload = function () {
+            /**
+             *  setInterval()
+             *  開啟一個定時器
+             *      可以設定一個參數 經過一段時間執行一次
+             *  1. 參數 執行函數
+             *  2. 參數 毫秒ms
+             *  回傳 number 類型變數
+             * 
+             *  清除定時器
+             *  clearInterval()
+             * */
+            let i = 2;
+            // setInterval(function () {
+            //     document.getElementById('target').textContent = i++;
+            // }, 1000)
+
+            // clearInterval(timer
+            let timer = setInterval(displayCount, 1000);
+            function displayCount() {
+                document.getElementById('target').textContent = i++;
+                if (i == 11) {
+                    clearInterval(timer);
+                }
+            }
+
+            // slideUp
+            let box = document.getElementById('box');
+            let boxStyle = window.getComputedStyle(box);
+
+            document.getElementById('slideUp').addEventListener('click', () => {
+                console.log(box.style.height); // 讀取元素行內樣式
+                console.log(boxStyle.height);
+                let timer = setInterval(slideUp, 30);
+                function slideUp() {
+                    let newHeight = parseInt(boxStyle.height) - 5;
+                    if (newHeight <= 0) {
+                        clearInterval(timer);
+                    }
+                    box.style.height = newHeight + 'px';// 轉回字串設定樣式
+                }
+            })
+
+            // sildeDown
+            document.getElementById('slideDown').addEventListener('click', () => {
+                let timer = setInterval(slideDown, 50);
+                function slideDown() {
+                    let newHeight = parseInt(boxStyle.height) + 5;
+                    if (newHeight >= 200) {
+                        clearInterval(timer);
+                    }
+                    box.style.height = newHeight + 'px';// 轉回字串設定樣式
+                }
+            })
+
+            /*
+             *  setTimeout()
+             *  開啟一個定時器
+             *      可以設定一個參數 經過一段時間執行一次 (只執行一次)
+             *  1. 參數 執行函數
+             *  2. 參數 毫秒ms
+             * 
+             *  回傳 number 類型變數
+             * 
+             *  清除定時器
+             *  clearTimeout()
+             * */
+
+            setTimeout(function () {
+                console.log('3秒後說Hello')
+            }, 3000)
+
+            /**
+             * 計時器
+             * console.time('計時器名稱') #開啟計時器
+             * console.timeEnd('計時器名稱') #結束計時器
+             * 
+            */
+            console.time('2的100000次方所花時間');
+            Math.pow(2, 100000);
+            console.timeEnd('2的100000次方所花時間');
+
+        }
+    </script>
+</body>
+
+</html>

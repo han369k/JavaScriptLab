@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onload</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+    <script>
+        // onload事件 會在頁面載入完成後才執行程式碼
+        window.onload = function () {
+            let btn2 = document.getElementById('btn2');
+            console.log(btn2);
+            btn2.onclick = function () {
+                console.log('click buton2-1');
+            }
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>onload事件</h1>
+    </header>
+    <div class="container">
+        <!-- 第一種綁定方式 -->
+        <!-- onclick就是點擊觸發 -->
+        <button id="btn2">button2</button>
+    </div>
+</body>
+
+</html>

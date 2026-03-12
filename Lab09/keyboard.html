@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鍵盤事件</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>鍵盤事件</h1>
+    </header>
+    <div class="container">
+        <input type="text" id="input" placeholder="請輸入">
+        <div id="target"></div>
+    </div>
+    <script>
+        // JavaScript code
+        window.onload = function () {
+            const input = document.getElementById('input');
+            // keyup
+            // input.addEventListener('keyup', (event) => {
+            //     // console.log('keyup');
+            //     // 讀取元素屬性 element.value
+            //     // console.log(input.value);
+            //     console.log(event.keyCode);
+            //     document.getElementById('target').textContent = input.value;
+            // })
+
+            // keydown
+            input.addEventListener('keydown', (event) => {
+                //     // console.log('keydown');
+                //     // 讀取元素屬性 element.value
+                document.getElementById('target').textContent = event.target.value;
+                //     console.log(event.keyCode);
+                if (event.ctrlKey && event.altKey) {
+                    console.log('hello');
+                }
+            })
+
+            // keypress 功能鍵 數字無法觸發
+            // input.addEventListener('keypress', (event) => { })
+            // console.log('keypress');
+            // 讀取元素屬性 element.value
+            // console.log(input.value);
+
+
+        }
+    </script>
+</body>
+
+</html>

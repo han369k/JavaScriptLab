@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operator</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Operator</h1>
+    </header>
+    <div class="container"></div>
+    <script>
+        // javascript code
+        // 算術運算子
+        // + plus
+        var result = 1 + 2 + 3;// 6
+        var result = 1 + 2 + '3';// 33 轉成字串
+        var result = '1' + 2 + 3;// 遇到字串 後面任何Value都轉成String
+
+        // Any value + NaN results in NaN
+        var result = 1 + NaN;// NaN
+
+        let a = 123;
+        // 老的project可能會看到 利用這個特性轉型
+        a = a + '';
+        console.log(a);
+        console.log(typeof a);
+
+        // - reduce
+        var result = 100 - 5;// 95
+        var result = 100 - '5';// 95
+        // reduce Not Number is NaN
+        var result = 100 - 'a';// NaN
+        // ture is 1
+        var result = 100 - true// 99
+        console.log(result);
+
+        let b = '99';
+        // 數字字串-0 轉成number
+        b = b - 0;
+        console.log(b);
+        console.log(typeof b);
+
+        /*
+            遞增 遞減 Increasing Decreasing
+            ++   --
+            Increasing 分兩種
+                前++: ++a
+                後++: a++
+                結果立即原值+1
+                不同的是 ++a 和 a++ 值的本身
+                ++a 值等於原Var的新值 自增後的值
+                a++ 等於原變數的值 自增前的值
+        */
+        let x = 10;
+        let x1 = x++;
+        console.log('x=' + x);// 11
+        console.log('x=1' + x1);// 10
+
+        // 邏輯運算子
+        /*
+            && AND
+                第一個值為true 返回第二個值
+                第一個值為false 不會檢查第二個值 直接返回第一個值
+            || OR
+                第一個值為true 返回第一個值
+                第一個值為false 直接返回第二個值
+            ! NOT
+                
+        */
+        var result = true && false;
+        var result = 5 && 6;// 6
+        var result = 0 && 6;// 0
+        var result = 5 || 6;// 5
+        var result = '' || 'hello';// hello
+        var result = -1 || 'hello'// -1 (-1 is true)
+        console.log(result);
+
+        // 指派運算子
+        /*
+            += -= *= /=
+        */
+        let c = 10;
+        c = c + 5;
+        c += 5;
+
+        // 比較運算子
+        /*
+            > <
+            >= <=
+            == ===
+        */
+        var result = 1 == 1;
+        var result = 1 == '1';
+        var result = 1 == true;
+        var result = 'a' < 'b'; //true
+        // 字串會比較 unicode 0001 < 0002
+        var result = '陳' > '蔡';
+        // 字串間盡量不要比較
+        var result = 123 > NaN;// false
+        // Any value compared with NaN always flase.
+        // Evan NaN itself
+        // isNaN(); Judge this value is NaN.
+        console.log(result);
+
+        // == 嚴格相等 !==
+        console.log('123' == 123);// true
+        console.log('123' === 123);// false
+
+        /*
+            preview 三元運算子
+                條件 ? 執行1 : 執行2
+                條件true 執行1
+                條件false 執行2
+        */
+        let e = 10;
+        let f = 20;
+        // ef最大值
+        var max = e > f ? e : f
+        console.log(max);
+        let g = 99;
+        // efg 最大值
+        var max = e > f ? (e > g ? e : g) : (f > g ? f : g);
+        console.log(max);
+
+    </script>
+</body>
+
+</html>

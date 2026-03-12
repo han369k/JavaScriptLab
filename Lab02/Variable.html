@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variable</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Variable</h1>
+    </header>
+    <div class="container"></div>
+    <script>
+        // javascript code
+        /*
+            var
+                重複宣告
+                全域範圍
+                function來限制範圍
+
+            let 
+                ES6新出的保留字
+                不可重複宣告
+                區域範圍
+
+            const 
+                ES6新出保留字
+                有點類似Java Final
+        */
+        var a;// 宣告
+        console.log(a);// undefined
+        a = 123;// 賦值 or 指派 Number
+        console.log(a);
+        var b = '456';
+        console.log(b);
+        var a = 'hank';// 重複宣告
+        console.log(a);
+
+        var i = 6;
+        if (true) {
+            var i = 5;
+        }
+        console.log(i);// 一個區塊會影響全域
+
+        let j = 6;
+        if (true) {
+            let j = 5;
+        }
+        console.log(j);// 6 區域範圍
+
+        const PI = 3.1415926;
+        const SQL = 'select * from table';
+        const functionName = function () {
+
+        }
+    </script>
+</body>
+
+</html>

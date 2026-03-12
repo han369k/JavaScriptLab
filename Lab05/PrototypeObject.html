@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab05</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Prototype Object原型物件</h1>
+    </header>
+    <div class="container"></div>
+    <script>
+        // javascript code
+        function createPerson(name, age, gender) {
+            let obj = {};
+            obj.name = name;
+            obj.age = age;
+            obj.gender = gender;
+            return obj;
+        }
+        let obj1 = createPerson('gary1', 18, 'male');
+        let obj2 = createPerson('gary2', 18, 'male');
+        console.log(obj1);
+        console.log(obj2);
+
+        /*
+            Prototype object 原型物件
+                1. 第一個字母大寫
+                2. 新建立物件this生成
+                3. 不需要寫return
+                4. new保留字來實體化產生物件
+        */
+        function Person(name, age, gender) {
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+            // 每一次實作new 都會增一個函數function
+            // this.sayName = function () {
+            //     return 'hello';
+            // }
+            // this.sayName = fun;
+        }
+
+        // function fun() {
+        //     return 'hello';
+        // }
+        let personA = new Person('garyA', 18, '男生');
+        let personB = new Person('garyB', 18, '男生');
+        console.log(personA);
+        // console.log(personB.sayName());
+        // 原型物件新增屬性 prototype
+        Person.prototype.address = '中壢';
+        console.log(personA.address);
+        Person.prototype.sayName = function () {
+            return 'hello';
+        }
+
+        // instanceof 判斷該物件是否原型物件實體化
+        console.log(personA instanceof Person);
+
+        // ES6 class constructor
+        class Animal {
+            // constructor 
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            // method 自動加到 prototype property
+            sayHi() {
+                console.log('hi');
+            }
+        }
+
+        let cat = new Animal('Lemon', '5');
+        console.log(cat);
+        cat.sayHi();
+    </script>
+</body>
+
+</html>

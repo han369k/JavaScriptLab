@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>This</h1>
+    </header>
+    <div class="container"></div>
+    <script>
+        // javascript code
+        /*
+            this 指向一個物件
+            依照上下文來決定 this 是誰
+            
+            情境            指向
+            全域環境         window object(全域object)
+            function        window object
+            object method   for this object
+            constructor     建立實體
+            事件            觸發事件元素
+            call/apply      parameter element
+        */
+        console.log(this);
+        var name = '全域的name';
+        console.log(this.name);
+
+        function fun() {
+            console.log(this);
+            console.log(this.name);
+        }
+
+        fun();// window物件,全域的name
+
+        var obj = {
+            name: 'gary',
+            sayName: fun
+        }
+        obj.sayName();// obj物件,gary
+
+        // What's differned between function and Arrow function
+        let obj2 = {
+            name: 'object',
+            print: function () {
+                console.log(this);
+                function printAgain() {
+                    console.log(this);
+                }
+                printAgain();
+            }
+        }
+        obj2.print();// obj2 object,window object
+
+        let obj3 = {
+            name: 'object',
+            print: function () {
+                console.log(this);
+                /*
+                    Arrow Function沒有自己的this
+                    他會往外找object繼承 如果沒有window object
+
+                */
+                var printAgain = () => console.log(this);
+                printAgain();
+            }
+        }
+        obj3.print();// obj3物件, obj3物件
+
+    </script>
+</body>
+
+</html>

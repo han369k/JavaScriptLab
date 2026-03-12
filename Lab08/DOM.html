@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: yellow;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>DOM (Document Object Model)</h1>
+    </header>
+    <div class="container">
+        <button>button</button>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <input type="checkbox" name="checkboxgrouop">
+        <input type="checkbox" name="checkboxgrouop">
+        <input type="checkbox" name="checkboxgrouop1">
+        <input type="checkbox" name="checkboxgrouop1">
+        <div class="'target"></div>
+        <div class="'target"></div>
+        <div class="'target"></div>
+    </div>
+    <script>
+        // javascript code
+        // document.getElementById(id名稱); 單選選擇器
+        let btn = document.getElementById('btn');
+        console.log(btn);
+
+        // document.getElementsByTagName(元素標籤) 複選選擇器
+        // HTML Collection集合 元素節點
+        let liArr = document.getElementsByTagName('li');
+        console.log(liArr);
+
+        // document.getElementsByName(name屬性名稱) 複選選擇器
+        // NodeList集合 元素節點 文字節點 屬性節點
+        let checkboxgroup = document.getElementsByName('checkboxgroup');
+        console.log(checkboxgroup);
+
+        // documenmt.getElementByClassName(class名稱) 複選選擇器
+        // HTML Collection集合 元素節點
+        let divList = document.getElementsByClassName('target');
+        console.log(divList);
+
+        /*
+            document.querySelector(css選擇器) 單選選擇器
+            document.querySelectorAll() 複選選擇器
+            NodeList集合 元素節點 文字節點 屬性節點
+        */
+        let btn2 = document.querySelector('#btn');
+        let target = document.querySelectorAll('.target');
+        console.log(btn2);
+        console.log(target);
+
+    </script>
+</body>
+
+</html>
